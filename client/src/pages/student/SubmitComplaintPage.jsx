@@ -222,7 +222,7 @@ export const SubmitComplaintPage = () => {
       landmark: 'Ceiling mount near central podium',
       priority: 'high',
       description:
-        'The overhead projector in Classroom 304 suddenly shut down during the INT252 lecture. Power LED blinks red, and HDMI input gives no signal. Requires urgent technician dispatch before afternoon lab session.',
+        'The overhead projector in Classroom 304 suddenly shut down during the morning lecture. Power LED blinks red, and HDMI input gives no signal. Requires urgent technician dispatch before afternoon lab session.',
     });
     setErrors({});
     setCurrentStep(4); // Jump directly to Review & Submit for live demonstration!

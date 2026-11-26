@@ -109,7 +109,7 @@ export const AnalyticsPage = () => {
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
                 <BarChart3 className="w-3.5 h-3.5" /> Recharts Facility Telemetry
               </span>
-              <span className="text-xs text-indigo-200/70 font-mono">INT252 Unit VI Data Visualization</span>
+              <span className="text-xs text-indigo-200/70 font-mono">Real-Time Facility Telemetry</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               Campus Facility Analytics & SLA Health

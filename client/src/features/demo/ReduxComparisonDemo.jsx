@@ -19,17 +19,17 @@ export const ReduxComparisonDemo = () => {
       <div>
         <div className="flex items-center gap-2 mb-1">
           <Badge variant="purple" size="sm">
-            INT252 Unit VI
+            Architecture Matrix
           </Badge>
-          <span className="text-xs text-slate-400 font-medium">State Architecture Analysis</span>
+          <span className="text-xs text-slate-400 font-medium">State Management Evaluation</span>
         </div>
         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
           Global State Management: Architecture & Decision Matrix
         </h1>
         <p className="mt-1 text-xs text-slate-500 max-w-2xl leading-relaxed">
-          In INT252, state management decisions form a critical milestone. This comparison explains
+          State management decisions form a critical milestone in enterprise web applications. This comparison explains
           why <strong>Zustand</strong> and <strong>TanStack Query</strong> were chosen for CampusFix
-          alongside an architectural demonstration of <strong>Redux Toolkit (RTK)</strong>.
+          alongside an architectural evaluation of <strong>Redux Toolkit (RTK)</strong>.
         </p>
       </div>
 

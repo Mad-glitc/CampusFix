@@ -1,6 +1,6 @@
 # CampusFix – Smart Campus Issue Management System
 
-> **INT252: Web App Development with ReactJS – Capstone Full-Stack Project**  
+> **CampusFix – Next-Gen Campus Issue Reporting & Facility Management Platform**  
 > *Production-Ready Full-Stack Web Application solving university infrastructure and facility maintenance challenges.*
 
 ---
@@ -83,38 +83,7 @@ sequenceDiagram
 
 ---
 
-## 4. INT252 React Syllabus Coverage Mapping (75%+ Explicit Coverage)
-
-The table below documents how every unit of the INT252 syllabus is implemented within the codebase:
-
-| Syllabus Unit | Core Concept | Implementation in CampusFix | Source File Reference |
-| :--- | :--- | :--- | :--- |
-| **Unit I** | Arrow functions, let/const, destructuring, spread/rest | Universal modern ES6+ coding standard across all components, stores, and services | `src/utils/cn.js`, `src/components/common/Button.jsx` |
-| **Unit I** | Array methods (`map`, `filter`, `reduce`, `find`) | Calculating SLA rates with `.reduce()`, status tab filtering with `.filter()`, rendering cards with `.map()`, next task lookup with `.find()` | `src/pages/admin/AnalyticsPage.jsx`, `src/pages/staff/StaffDashboard.jsx` |
-| **Unit I** | Functional components, JSX, Vite build setup | Clean functional component architecture, Vite HMR, and production bundle code-splitting | `client/vite.config.js`, `src/App.jsx` |
-| **Unit II** | Component composition & Props | Reusable card shells (`Card.Header`, `Card.Content`, `Card.Footer`), modal overlays | `src/components/common/Card.jsx`, `Modal.jsx` |
-| **Unit II** | Conditional rendering | Multi-state badges, skeleton loaders, and empty queue states | `src/components/common/Badge.jsx`, `EmptyState.jsx` |
-| **Unit II** | Lifting state up | State for mobile navigation drawer, filters, and modals elevated to page parents | `src/layouts/AppLayout.jsx`, `src/pages/student/MyComplaintsPage.jsx` |
-| **Unit II** | Tailwind CSS & Breakpoints | Mobile-first responsive dashboards (`sm:`, `md:`, `lg:`, `xl:`) with custom elevation shadows | `client/tailwind.config.js`, all page layouts |
-| **Unit II** | Semantic HTML & Accessibility | `<main>`, `<aside>`, `<header>`, `aria-invalid`, `htmlFor` label bindings, and modal ESC key dismiss | `src/components/common/Modal.jsx`, `src/components/forms/Input.jsx` |
-| **Unit III** | `useState` & Derived state | Form field bindings, active tab selections, modal toggles, and computed counts | `src/pages/student/SubmitComplaintPage.jsx` |
-| **Unit III** | `useEffect` & Effect cleanup | Timer cancellation on unmount (`clearInterval`), revoking object URLs (`URL.revokeObjectURL`) to prevent memory leaks | `src/hooks/useAutoRefresh.js`, `src/components/forms/FileInput.jsx` |
-| **Unit III** | `useContext` | Scoped theme and accessibility preference toggling | `src/context/ThemeContext.jsx` |
-| **Unit III** | `useMemo` | Memoizing heavy SLA percentage computations and Recharts data transformations | `src/pages/admin/AnalyticsPage.jsx` |
-| **Unit III** | Custom Hooks | Reusable abstractions: `useDebounce`, `useAutoRefresh`, `useComplaintsQuery` | `src/hooks/useDebounce.js`, `src/hooks/useAutoRefresh.js` |
-| **Unit IV** | Controlled vs Uncontrolled Components | Controlled text inputs (`Input.jsx`) paired with uncontrolled file inputs (`FileInput.jsx` using `useRef`) | `src/components/forms/Input.jsx`, `FileInput.jsx` |
-| **Unit IV** | Zod schema validation & Dynamic error feedback | Client-side validation for authentication and ticket reporting with inline schema error alerts | `src/schemas/auth.schema.js`, `src/schemas/complaint.schema.js` |
-| **Unit V** | Axios with interceptors | Bearer token injection and global 401 unauthenticated redirect handling | `src/services/axiosInstance.js` |
-| **Unit V** | TanStack React Query v5 | Server state caching, query invalidation (`invalidateQueries`), background sync | `src/hooks/useComplaintsQuery.js` |
-| **Unit V** | React Router DOM v6 | Nested layouts (`AppLayout`, `AuthLayout`), dynamic routes, query parameters (`useSearchParams`), protected routes | `src/routes/AppRoutes.jsx`, `src/routes/ProtectedRoute.jsx` |
-| **Unit V** | Code splitting & `React.lazy` | Route-based bundle chunking with `<Suspense fallback={<LoadingScreen />}>` | `src/routes/AppRoutes.jsx` |
-| **Unit VI** | Zustand Global State | Clean client stores for authentication session and toast notifications | `src/store/authStore.js`, `src/store/toastStore.js` |
-| **Unit VI** | Redux Toolkit Architectural Comparison | Interactive educational comparison module explaining RTK vs Zustand vs Context API tradeoffs | `src/features/demo/ReduxComparisonDemo.jsx` |
-| **Unit VI** | Recharts Visualizations | Interactive Bar and Donut/Pie charts rendering facility telemetry | `src/pages/admin/AnalyticsPage.jsx` |
-
----
-
-## 5. Role-Based Access Control (RBAC) Matrix
+## 4. Role-Based Access Control (RBAC) Matrix
 
 | Feature / Action | Student (`student`) | Maintenance Staff (`staff`) | Administrator (`admin`) |
 | :--- | :---: | :---: | :---: |
@@ -134,7 +103,7 @@ The table below documents how every unit of the INT252 syllabus is implemented w
 
 ---
 
-## 6. Database Schema Design (MongoDB)
+## 5. Database Schema Design (MongoDB)
 
 1. **`User` Collection**:
    - `name`, `email` (unique), `password` (bcrypt hashed), `role` (`'student' | 'staff' | 'admin'`), `department`, `phoneNumber`, `avatar`, `isActive`, `timestamps`.
@@ -151,11 +120,11 @@ The table below documents how every unit of the INT252 syllabus is implemented w
 
 ---
 
-## 7. Step-by-Step Live Faculty Demonstration Script
+## 6. Step-by-Step Live Product Demonstration Script
 
-To present this application during a live examination or faculty viva, follow this exact sequence:
+To walk through the complete issue lifecycle, follow this exact sequence:
 
-| Step | Persona | Action | What to Point Out to Faculty |
+| Step | Persona | Action | Key Feature Demonstrated |
 | :---: | :--- | :--- | :--- |
 | **1** | Student | Go to `/login` and click **"🎓 Student"** demo button, then click **Sign In**. | Highlights one-click demo credentials and Zustand auth persistence. |
 | **2** | Student | Navigate to **"Report New Issue"** and click **"Autofill Demo Scenario"**. | Demonstrates Zod schema validation, location grouping, and image upload with instant preview. |
@@ -170,7 +139,7 @@ To present this application during a live examination or faculty viva, follow th
 
 ---
 
-## 8. Demo Credentials
+## 7. Demo Credentials
 
 | Role | Email | Password | Pre-configured Workload |
 | :--- | :--- | :--- | :--- |
@@ -184,7 +153,7 @@ To present this application during a live examination or faculty viva, follow th
 
 ---
 
-## 9. Local Installation & Setup Guide
+## 8. Local Installation & Setup Guide
 
 ### Prerequisites
 - Node.js (v18.0.0 or later)
@@ -217,7 +186,7 @@ npm install
   PORT=5000
   NODE_ENV=development
   MONGODB_URI=mongodb://127.0.0.1:27017/campusfix
-  JWT_SECRET=campusfix_jwt_super_secret_key_2026_int252_production
+  JWT_SECRET=campusfix_jwt_super_secret_key_2026_production
   JWT_EXPIRES_IN=7d
   CLIENT_URL=http://localhost:5173
   UPLOAD_DIR=uploads
@@ -244,7 +213,7 @@ npm install
 
 ---
 
-## 10. Production Deployment Instructions
+## 9. Production Deployment Instructions
 
 ### 1. Database (MongoDB Atlas)
 1. Create a free shared cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).

@@ -148,7 +148,7 @@ export const AuthLayout = () => {
               <Cpu className="w-3.5 h-3.5 text-purple-400" /> Real-Time Auto-Refresh
             </span>
           </div>
-          <span className="font-mono text-[11px] text-slate-400">INT252 Capstone Edition</span>
+          <span className="font-mono text-[11px] text-slate-400">Enterprise Edition v2.4</span>
         </div>
       </div>
 
