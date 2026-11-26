@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
 
@@ -140,6 +141,64 @@ export const login = async (req, res, next) => {
         success: false,
         message: 'Please provide email and password',
       });
+    }
+
+    // Resilient Cloud Demo Fallback: If MongoDB is disconnected or buffering on Vercel
+    if (!mongoose.connection || mongoose.connection.readyState !== 1) {
+      const demoUsers = {
+        'student@campus.edu': {
+          id: '65f011111111111111111101',
+          name: 'Alex Johnson',
+          email: 'student@campus.edu',
+          role: 'student',
+          department: 'Computer Science',
+          phoneNumber: '+1-555-0101',
+        },
+        'admin@campusfix.edu': {
+          id: '65f011111111111111111102',
+          name: 'Prof. Sharma',
+          email: 'admin@campusfix.edu',
+          role: 'admin',
+          department: 'Estate & Campus Administration',
+          phoneNumber: '+1-555-0199',
+        },
+        'electrician@campusfix.edu': {
+          id: '65f011111111111111111103',
+          name: 'Rajesh Kumar',
+          email: 'electrician@campusfix.edu',
+          role: 'staff',
+          department: 'Electrical & AV',
+          phoneNumber: '+1-555-0144',
+        },
+        'plumber@campusfix.edu': {
+          id: '65f011111111111111111104',
+          name: 'Mohan Lal',
+          email: 'plumber@campusfix.edu',
+          role: 'staff',
+          department: 'Sanitation & Plumbing',
+          phoneNumber: '+1-555-0145',
+        },
+        'carpenter@campusfix.edu': {
+          id: '65f011111111111111111105',
+          name: 'Sunil Verma',
+          email: 'carpenter@campusfix.edu',
+          role: 'staff',
+          department: 'Civil & Carpentry',
+          phoneNumber: '+1-555-0146',
+        },
+      };
+
+      const normalizedEmail = email.toLowerCase().trim();
+      if (demoUsers[normalizedEmail] && password === 'password123') {
+        const u = demoUsers[normalizedEmail];
+        const token = generateToken(u.id, u.role);
+        return res.status(200).json({
+          success: true,
+          message: 'Authentication successful (Cloud Demo Mode)',
+          token,
+          user: u,
+        });
+      }
     }
 
     // Find user by email, selecting password

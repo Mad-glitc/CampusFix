@@ -1,19 +1,20 @@
 import mongoose from 'mongoose';
 
 /**
- * MongoDB connection manager with resilient reconnection listeners
+ * MongoDB connection manager with resilient reconnection listeners and connection reuse
  */
 export const connectDB = async () => {
+  if (mongoose.connection && mongoose.connection.readyState >= 1) {
+    return mongoose.connection;
+  }
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/campusfix', {
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 4000,
     });
     console.log(`[Database] MongoDB Connected: ${conn.connection.host}/${conn.connection.name}`);
     return conn;
   } catch (error) {
     console.warn(`[Database Warning] MongoDB connection failed: ${error.message}`);
-    console.warn(`[Database Notice] Please ensure MongoDB is running or configure MONGODB_URI in server/.env (e.g. MongoDB Atlas)`);
-    // Do not crash the entire server process so developers can inspect and seed when DB is ready
     return null;
   }
 };

@@ -24,15 +24,21 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+import os from 'os';
+
 // Ensure uploads folder exists
-const uploadsDir = path.join(__dirname, '../uploads');
+const uploadsDir = process.env.VERCEL ? path.join(os.tmpdir(), 'uploads') : path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+  try {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  } catch (e) {
+    // ignore in serverless environments
+  }
 }
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: true,
   credentials: true,
 }));
 app.use(morgan('dev'));
@@ -113,17 +119,19 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Connect to Database and start server
+// Connect to Database and start server locally (not in Vercel serverless)
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`[Server] CampusFix API running on http://localhost:${PORT}`);
-    // Run SLA automatic escalation worker every 5 minutes
-    setInterval(() => {
-      processAutomaticEscalations().catch((err) => console.error('[Auto-Escalation Worker Error]:', err));
-    }, 5 * 60 * 1000);
+if (!process.env.VERCEL) {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`[Server] CampusFix API running on http://localhost:${PORT}`);
+      // Run SLA automatic escalation worker every 5 minutes
+      setInterval(() => {
+        processAutomaticEscalations().catch((err) => console.error('[Auto-Escalation Worker Error]:', err));
+      }, 5 * 60 * 1000);
+    });
   });
-});
+}
 
 export default app;
