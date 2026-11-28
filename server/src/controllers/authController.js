@@ -143,7 +143,7 @@ export const login = async (req, res, next) => {
       });
     }
 
-    // Resilient Cloud Demo Fallback: If MongoDB is disconnected or buffering on Vercel
+    // Resilient Demo Fallback: If MongoDB is not yet running locally or connecting
     if (!mongoose.connection || mongoose.connection.readyState !== 1) {
       const demoUsers = {
         'student@campus.edu': {

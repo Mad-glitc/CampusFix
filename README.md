@@ -160,80 +160,44 @@ To walk through the complete issue lifecycle, follow this exact sequence:
 - npm (v9.0.0 or later)
 - MongoDB (Local Community Server running on `127.0.0.1:27017` or MongoDB Atlas URI)
 
-### Step 1: Clone or Navigate to Project
+### Step 1: Extract ZIP or Clone Repository
+Navigate into the project root directory:
 ```bash
-cd "REACT PROJECT MAKING FINAL"
+cd CampusFix
 ```
 
-### Step 2: Install Backend Dependencies & Seed Database
+### Step 2: Install All Dependencies
+Run this single command from the project root:
+```bash
+npm run install:all
+```
+*(Or install manually: `cd server && npm install && cd ../client && npm install`)*
+
+### Step 3: (Optional) Seed Sample Database Data
 ```bash
 cd server
-npm install
-
-# (Optional) Seed the database with demo accounts, categories, and sample tickets:
 npm run seed
 ```
 
-### Step 3: Install Frontend Dependencies
-```bash
-cd ../client
-npm install
-```
+### Step 4: Configure Environment Files
+Default `.env.example` templates are provided in both `server` and `client`:
+- Copy `server/.env.example` to `server/.env`
+- Copy `client/.env.example` to `client/.env`
 
-### Step 4: Configure Environment Variables
-- `server/.env`:
-  ```env
-  PORT=5000
-  NODE_ENV=development
-  MONGODB_URI=mongodb://127.0.0.1:27017/campusfix
-  JWT_SECRET=campusfix_jwt_super_secret_key_2026_production
-  JWT_EXPIRES_IN=7d
-  CLIENT_URL=http://localhost:5173
-  UPLOAD_DIR=uploads
-  ```
-- `client/.env`:
-  ```env
-  VITE_API_URL=/api
-  ```
+*(The default configuration points directly to `mongodb://127.0.0.1:27017/campusfix` and backend port `5000`)*
 
-### Step 5: Start Development Servers
-1. Start Express backend:
+### Step 5: Start Both Servers
+Open two terminal windows:
+1. **Terminal 1 (Backend API)**:
    ```bash
    cd server
    npm run dev
-   # API running at http://localhost:5000
+   # Server running on http://localhost:5000
    ```
-2. In a separate terminal, start Vite frontend:
+2. **Terminal 2 (Frontend App)**:
    ```bash
    cd client
    npm run dev
-   # Client running at http://localhost:5173
+   # Web App running on http://localhost:5173
    ```
-3. Open your browser and navigate to `http://localhost:5173`.
-
----
-
-## 9. Production Deployment Instructions
-
-### 1. Database (MongoDB Atlas)
-1. Create a free shared cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-2. Create a database user with read/write access.
-3. Whitelist `0.0.0.0/0` (Network Access) for cloud hosting providers.
-4. Copy your connection string into `MONGODB_URI`.
-
-### 2. Backend (Render / Railway / Cyclic)
-1. Push your repository to GitHub.
-2. In **Render**, create a **New Web Service**, connect your repository, and set the Root Directory to `server`.
-3. Set **Build Command**: `npm install`.
-4. Set **Start Command**: `npm start`.
-5. Add the environment variables from `server/.env.example` (especially `MONGODB_URI`, `JWT_SECRET`, and `CLIENT_URL`).
-6. Deploy the service and copy your public backend URL (e.g., `https://campusfix-api.onrender.com`).
-
-### 3. Frontend (Vercel)
-1. In **Vercel**, create a **New Project**, import the GitHub repository, and select the `client` directory as the Root Directory.
-2. Set **Framework Preset**: Vite.
-3. In **Environment Variables**, set:
-   ```
-   VITE_API_URL=https://campusfix-api.onrender.com/api
-   ```
-4. Click **Deploy**. Vercel will build the production bundle (`npm run build`) and host the site with worldwide CDN distribution.
+3. Open **`http://localhost:5173`** in your browser.
