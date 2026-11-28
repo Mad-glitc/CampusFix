@@ -49,3 +49,7 @@ Thumbs.db
 # Uploaded media (keep sample/directory structure, ignore runtime uploads)
 server/uploads/*
 !server/uploads/.gitkeep
+
+# System Architecture & Local Report Assets
+system_architecture_campusfix.png
+*.png
